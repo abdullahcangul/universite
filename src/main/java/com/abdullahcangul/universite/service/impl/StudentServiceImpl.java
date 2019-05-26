@@ -5,9 +5,10 @@ import com.abdullahcangul.universite.entity.University;
 import com.abdullahcangul.universite.repository.StudentRepository;
 import com.abdullahcangul.universite.repository.UniversityRepository;
 import com.abdullahcangul.universite.service.StudentService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;

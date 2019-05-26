@@ -3,9 +3,11 @@ package com.abdullahcangul.universite.service.impl;
 import com.abdullahcangul.universite.entity.University;
 import com.abdullahcangul.universite.repository.UniversityRepository;
 import com.abdullahcangul.universite.service.UniversityService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UniverstyServiceImpl implements UniversityService {
 
     private final UniversityRepository universityRepository;
