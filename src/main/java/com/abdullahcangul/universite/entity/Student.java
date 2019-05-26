@@ -33,5 +33,4 @@ public class Student extends BaseEntity {
     @JoinColumn(name = "university_id",referencedColumnName = "id")
     private University university;
 
-
 }
