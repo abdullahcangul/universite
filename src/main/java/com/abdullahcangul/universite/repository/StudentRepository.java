@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student,Integer> {
     List<Student> findAll();
-    Student getStudentByIdOrderById();
+    Student getStudentById(int id);
 }
