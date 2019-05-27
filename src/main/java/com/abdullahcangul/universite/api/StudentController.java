@@ -3,10 +3,7 @@ package com.abdullahcangul.universite.api;
 import com.abdullahcangul.universite.entity.Student;
 import com.abdullahcangul.universite.service.impl.StudentServiceImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +26,10 @@ public class StudentController  {
     public ResponseEntity<Student> getStudent(@PathVariable(value="id") int id){
         Student student= studentService.getStudentById(id);
         return ResponseEntity.ok(student);
+    }
+
+    @PostMapping(value = "/")
+    public ResponseEntity<Student> createStudent(@RequestBody Student student){
+        return ResponseEntity.ok(studentService.save(student));
     }
 }
