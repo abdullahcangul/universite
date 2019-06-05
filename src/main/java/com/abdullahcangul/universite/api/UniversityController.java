@@ -1,8 +1,6 @@
 package com.abdullahcangul.universite.api;
 
-import com.abdullahcangul.universite.entity.Student;
 import com.abdullahcangul.universite.entity.University;
-import com.abdullahcangul.universite.service.impl.StudentServiceImpl;
 import com.abdullahcangul.universite.service.impl.UniverstyServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,9 +27,10 @@ public class UniversityController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<University> getUniversity(@PathVariable(value="id") int id){
+    public ResponseEntity<University> getUniversity(@PathVariable(value="id",required = true) int id){
         University university= universityService.getUniversity(id);
         return ResponseEntity.ok(university);
     }
+
 
 }

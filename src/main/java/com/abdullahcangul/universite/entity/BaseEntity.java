@@ -22,5 +22,5 @@ public class BaseEntity implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_at")
-    private String updatedAt;
+    private Date updatedAt;
 }

@@ -21,7 +21,7 @@ public class Student extends BaseEntity {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "name",length = 100)
     private String name;
 
 
@@ -29,8 +29,8 @@ public class Student extends BaseEntity {
     @Column(name = "started_at")
     private Date startedAt;
 
-    @ManyToOne()
-    @JoinColumn(name = "university_id",referencedColumnName = "id")
+    @ManyToOne(optional=true,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "university_id")
     private University university;
 
 }

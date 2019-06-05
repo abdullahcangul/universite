@@ -40,6 +40,6 @@ public class University extends BaseEntity {
     @Column(name = "founded_at")
     private Date foundedAt;
 
-    @OneToMany(mappedBy = "id",fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = false)
+    @OneToMany(mappedBy = "university",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Student> students;
 }
