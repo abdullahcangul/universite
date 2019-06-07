@@ -1,11 +1,11 @@
 package com.abdullahcangul.universite.service.impl;
 
-import com.abdullahcangul.universite.ViewModel.ViewUniversity;
 import com.abdullahcangul.universite.entity.Student;
 import com.abdullahcangul.universite.entity.University;
 import com.abdullahcangul.universite.repository.StudentRepository;
 import com.abdullahcangul.universite.repository.UniversityRepository;
 import com.abdullahcangul.universite.service.StudentService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -15,13 +15,13 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
-    private final UniversityRepository universityRepository;
+    private final ModelMapper modelMapper;
     private final UniverstyServiceImpl universtyService;
 
-    public StudentServiceImpl(UniverstyServiceImpl universtyService,StudentRepository studentRepository,UniversityRepository universityRepository){
+    public StudentServiceImpl(UniverstyServiceImpl universtyService, StudentRepository studentRepository, UniversityRepository universityRepository, ModelMapper modelMapper){
         this.studentRepository=studentRepository;
-        this.universityRepository=universityRepository;
         this.universtyService=universtyService;
+        this.modelMapper = modelMapper;
     }
 
 

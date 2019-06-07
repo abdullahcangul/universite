@@ -1,6 +1,5 @@
 package com.abdullahcangul.universite.service;
 
-import com.abdullahcangul.universite.ViewModel.ViewUniversity;
 import com.abdullahcangul.universite.entity.University;
 
 import java.util.List;
