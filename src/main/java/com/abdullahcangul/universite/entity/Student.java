@@ -25,7 +25,7 @@ public class Student extends BaseEntity {
     private String name;
 
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "started_at")
     private Date startedAt;
 

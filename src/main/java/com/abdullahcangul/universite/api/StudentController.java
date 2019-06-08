@@ -1,14 +1,15 @@
 package com.abdullahcangul.universite.api;
 
-import com.abdullahcangul.universite.dto.StudentDto;
-import com.abdullahcangul.universite.entity.Student;
+import com.abdullahcangul.universite.dto.*;
+import com.abdullahcangul.universite.entity.errorModel.ServiceResult;
 import com.abdullahcangul.universite.service.impl.StudentServiceImpl;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/students")
@@ -25,25 +26,21 @@ public class StudentController  {
     @GetMapping(value = "/")
     public ResponseEntity<List<StudentDto>> getAllStudents(){
 
-        return  ResponseEntity.ok(
-                studentService.findAll()
-                        .stream().map(x->{
-                          StudentDto studentDto= modelMapper.map(x, StudentDto.class);
-                          studentDto.setUniversity(x.getUniversity().getName());
-                            return studentDto;
-                        })
-                        .collect(Collectors.toList())
-        );
-
+        return  ResponseEntity.ok(studentService.findAll());
     }
+
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Student> getStudent(@PathVariable(value="id") int id){
-        Student student= studentService.getStudentById(id);
-        return ResponseEntity.ok(student);
+    public ResponseEntity getStudent(@PathVariable(value="id",required = true) int id){
+        ServiceResult<OneStudentDto> serviceResult=studentService.getStudentById(id);
+       if (serviceResult.getNotFound()!=null)
+           return new ResponseEntity<>(serviceResult.getNotFound(),HttpStatus.NOT_FOUND);
+       return ResponseEntity.ok(serviceResult.getResult());
+
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<Student> createStudent( @RequestBody Student student){
-        return ResponseEntity.ok(studentService.save(student));
+    public ResponseEntity<PostStudentResponseDto> createStudent(@Valid @RequestBody PostStudentDto postStudentDto){
+
+       return ResponseEntity.ok(studentService.save(postStudentDto));
     }
 }

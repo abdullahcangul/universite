@@ -15,6 +15,5 @@ public class PostStudentResponseDto {
     @ApiModelProperty(required = true)
     private Status Status;
     @ApiModelProperty(required = true)
-    @Column(nullable = false,length = 100)
     private String message;
 }

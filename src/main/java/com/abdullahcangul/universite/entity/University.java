@@ -36,7 +36,7 @@ public class University extends BaseEntity {
     @Column(name = "type",length = 50)
     private String type;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "founded_at")
     private Date foundedAt;
 

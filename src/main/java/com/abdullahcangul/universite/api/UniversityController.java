@@ -1,7 +1,12 @@
 package com.abdullahcangul.universite.api;
 
+import com.abdullahcangul.universite.dto.OneStudentDto;
+import com.abdullahcangul.universite.dto.UniversityDetailDto;
+import com.abdullahcangul.universite.dto.UniversityDto;
 import com.abdullahcangul.universite.entity.University;
+import com.abdullahcangul.universite.entity.errorModel.ServiceResult;
 import com.abdullahcangul.universite.service.impl.UniverstyServiceImpl;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,15 +26,19 @@ public class UniversityController {
     }
 
     @GetMapping(value = "/")
-    public ResponseEntity<List<University>> getAllUniversities(){
-        List<University> universities= universityService.findAll();
-        return ResponseEntity.ok(universities);
+    public ResponseEntity<List<UniversityDto>> getAllUniversities(){
+
+        return ResponseEntity.ok(universityService.findAll());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<University> getUniversity(@PathVariable(value="id",required = true) int id){
-        University university= universityService.getUniversity(id);
-        return ResponseEntity.ok(university);
+    public ResponseEntity getUniversity(@PathVariable(value="id",required = true) int id){
+
+        ServiceResult<UniversityDetailDto> serviceResult=universityService.getUniversity(id);
+        if (serviceResult.getNotFound()!=null)
+            return new ResponseEntity<>(serviceResult.getNotFound(), HttpStatus.NOT_FOUND);
+        return ResponseEntity.ok(serviceResult.getResult());
+
     }
 
 

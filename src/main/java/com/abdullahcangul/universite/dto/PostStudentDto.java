@@ -3,7 +3,6 @@ package com.abdullahcangul.universite.dto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
-import javax.persistence.Column;
 
 @Data
 @Getter
@@ -16,7 +15,7 @@ public class PostStudentDto {
     private String name;
 
     @ApiModelProperty(required = true,value = "started_at")
-    private String startedAt;
+    private String started_at;
 
     @ApiModelProperty(required = true)
     private Integer university;

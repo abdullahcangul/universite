@@ -16,11 +16,11 @@ import java.util.Date;
 public class BaseEntity implements Serializable {
 
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "created_at")
     private Date createdAt;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "updated_at")
     private Date updatedAt;
 }

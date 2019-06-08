@@ -8,5 +8,5 @@ import java.util.List;
 public interface UniversityRepository extends JpaRepository<University,Integer> {
 
     List<University> findAll();
-    University getById(int id);
+    University getByApiId(int id);
 }

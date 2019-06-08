@@ -1,8 +1,14 @@
 package com.abdullahcangul.universite.service.impl;
 
+import com.abdullahcangul.universite.dto.OneStudentDto;
+import com.abdullahcangul.universite.dto.UniversityDetailDto;
+import com.abdullahcangul.universite.dto.UniversityDto;
 import com.abdullahcangul.universite.entity.University;
+import com.abdullahcangul.universite.entity.errorModel.NotFound;
+import com.abdullahcangul.universite.entity.errorModel.ServiceResult;
 import com.abdullahcangul.universite.repository.UniversityRepository;
 import com.abdullahcangul.universite.service.UniversityService;
+import org.modelmapper.ModelMapper;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -13,25 +19,42 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UniverstyServiceImpl implements UniversityService {
 
     private final UniversityRepository universityRepository;
 
-    public UniverstyServiceImpl(UniversityRepository universityRepository){
+    private final ModelMapper modelMapper;
+
+    public UniverstyServiceImpl(UniversityRepository universityRepository, ModelMapper modelMapper){
         this.universityRepository=universityRepository;
+        this.modelMapper = modelMapper;
     }
 
 
     @Override
-    public List<University> findAll() {
-        return universityRepository.findAll();
+    public List<UniversityDto> findAll() {
+        return universityRepository.findAll()
+                .stream().map(x->modelMapper.map(x, UniversityDto.class)).collect(Collectors.toList());
     }
 
     @Override
-    public University getUniversity(int id) {
-        return universityRepository.getById(id);
+    public ServiceResult<UniversityDetailDto> getUniversity(int id) {
+
+        ServiceResult<UniversityDetailDto> serviceResult=new ServiceResult<>();
+        OneStudentDto oneStudentDto=new OneStudentDto();
+        University university= universityRepository.getByApiId(id);
+        if (university!=null){
+            serviceResult.setResult(modelMapper.map(university,UniversityDetailDto.class));
+            return serviceResult ;
+        }
+        NotFound notFound=new NotFound("error",id+" numaralı üniversite kaydı bulunamadı");
+        serviceResult.setNotFound(notFound);
+        return  serviceResult;
+
+
     }
 
     @Override

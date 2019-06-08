@@ -3,7 +3,6 @@ package com.abdullahcangul.universite.dto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
-import javax.persistence.Column;
 import java.io.Serializable;
 
 @Data
