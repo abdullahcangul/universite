@@ -3,7 +3,7 @@ package com.abdullahcangul.universite.dto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 
 @Data
@@ -17,8 +17,11 @@ public class OneStudentDto {
     @ApiModelProperty(required = true)
     private String name;
     @ApiModelProperty(required = true,value = "started_at",name = "started_at")
-    private Date started_at;
+    private LocalDate started_at;
 
     private OneStudentUniversityDto university;
 
+    public String getStarted_at() {
+        return started_at.toString();
+    }
 }

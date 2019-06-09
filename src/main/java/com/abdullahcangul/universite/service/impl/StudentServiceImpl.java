@@ -66,7 +66,7 @@ public class StudentServiceImpl implements StudentService {
      University universityForDto=new University();
      universityForDto.setApiId(postStudentDto.getUniversity());
      student.setUniversity(universityForDto);
-     student.setStartedAt(postStudentDto.getStarted_at());
+     student.setStarted_at(postStudentDto.getStarted_at());
      student.setCreatedAt(new Date());
      student.setUpdatedAt(new Date());
 

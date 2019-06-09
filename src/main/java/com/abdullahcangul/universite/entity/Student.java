@@ -26,7 +26,7 @@ public class Student extends BaseEntity {
 
 
     @Column(nullable = false,name = "started_at")
-    private LocalDate startedAt;
+    private LocalDate started_at;
 
 
     @ManyToOne(optional=true,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
