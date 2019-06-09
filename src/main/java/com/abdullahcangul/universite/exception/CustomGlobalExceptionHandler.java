@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+//validasyon larda hata olması durumunda girilen kod blogu
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
@@ -28,14 +29,14 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         body.put("message","Öğrenci eklenirken hata oluştu");
 
 
-
-        //Get all errors
+        //Tüm hata mesajlarını getirir
         List<String> errors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(x -> x.getDefaultMessage())
                 .collect(Collectors.toList());
-        //Get all errors
+
+        //tüm hatalı alanların adını getiren kod blogu
         List<String> keys = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
@@ -44,6 +45,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
         List<StudentError> studentErrorList=new ArrayList<>();
 
+        //Hata mesajlarını ve hatalı alanların isimlerini istenen formatta getiren kod blogu
         for (int i=0;i<errors.size();i++){
             studentErrorList.add(new StudentError(keys.get(i),errors.get(i)));
         }

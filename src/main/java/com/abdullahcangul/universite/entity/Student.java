@@ -25,7 +25,7 @@ public class Student extends BaseEntity {
     private String name;
 
 
-    @Column(name = "started_at")
+    @Column(nullable = false,name = "started_at")
     private LocalDate startedAt;
 
 

@@ -34,37 +34,41 @@ public class UniverstyServiceImpl implements UniversityService {
         this.modelMapper = modelMapper;
     }
 
-
+    //Veritabanında kayıtlı tüm üniversiteleri  dönen method blogu
     @Override
     public List<UniversityDto> findAll() {
         return universityRepository.findAll()
                 .stream().map(x->modelMapper.map(x, UniversityDto.class)).collect(Collectors.toList());
     }
 
+    //id si verilen üniversiteyi dönen kod blogu
     @Override
     public ServiceResult<UniversityDetailDto> getUniversity(int id) {
 
         ServiceResult<UniversityDetailDto> serviceResult=new ServiceResult<>();
         OneStudentDto oneStudentDto=new OneStudentDto();
         University university= universityRepository.getById(id);
+        //üniversite bulunduysa üniversiteyi dönen kod blogu
         if (university!=null){
             serviceResult.setResult(modelMapper.map(university,UniversityDetailDto.class));
             return serviceResult ;
         }
+        //bulunamadı durumunda hata mesajı döndüren kod blogu
         NotFound notFound=new NotFound("error",id+" numaralı üniversite kaydı bulunamadı");
         serviceResult.setNotFound(notFound);
         return  serviceResult;
 
 
     }
-
+    //Üniversite kaydı yapan kod blogu
     @Override
     public University save(University university) {
         university.setCreatedAt(new Date());
+        university.setUpdatedAt(new Date());
         return universityRepository.save(university);
     }
 
-
+    //Apiden üniversite listesi çeken kod blogu
     @Override
     public  List<University> getAllUniversity() {
         final String uri = "https://gitlab.com/kodiasoft/intern/2019/snippets/1859421/raw";

@@ -22,17 +22,18 @@ public class UniversityController {
     public UniversityController(UniverstyServiceImpl universityService){
         this.universityService=universityService;
     }
-
+    //Kayıtlı bütün üniversiteleri getiren kod blogu
     @GetMapping(value = "")
     public ResponseEntity<List<UniversityDto>> getAllUniversities(){
 
         return ResponseEntity.ok(universityService.findAll());
     }
-
+    //id si verilen üniversiteyi döndüren kod blogu
     @GetMapping(value = "/{id}")
     public ResponseEntity getUniversity(@PathVariable(value="id",required = true) int id){
 
         ServiceResult<UniversityDetailDto> serviceResult=universityService.getUniversity(id);
+        //id si verilen üniversite bulunamadıgında döndürülen kod blogu
         if (serviceResult.getNotFound()!=null)
             return new ResponseEntity<>(serviceResult.getNotFound(), HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(serviceResult.getResult());
