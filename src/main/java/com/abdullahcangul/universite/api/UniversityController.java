@@ -1,9 +1,7 @@
 package com.abdullahcangul.universite.api;
 
-import com.abdullahcangul.universite.dto.OneStudentDto;
 import com.abdullahcangul.universite.dto.UniversityDetailDto;
 import com.abdullahcangul.universite.dto.UniversityDto;
-import com.abdullahcangul.universite.entity.University;
 import com.abdullahcangul.universite.entity.errorModel.ServiceResult;
 import com.abdullahcangul.universite.service.impl.UniverstyServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -25,7 +23,7 @@ public class UniversityController {
         this.universityService=universityService;
     }
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "")
     public ResponseEntity<List<UniversityDto>> getAllUniversities(){
 
         return ResponseEntity.ok(universityService.findAll());

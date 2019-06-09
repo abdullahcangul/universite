@@ -11,6 +11,7 @@ import com.abdullahcangul.universite.service.StudentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,21 +63,26 @@ public class StudentServiceImpl implements StudentService {
      University universityForDto=new University();
      universityForDto.setApiId(postStudentDto.getUniversity());
      student.setUniversity(universityForDto);
+     student.setStartedAt(postStudentDto.getStarted_at());
+     student.setCreatedAt(new Date());
+
 
      University university=universityRepository.getByApiId(student.getUniversity().getApiId());
      if(university==null){
          university= (University) universtyService.getAllUniversity().stream()
                .filter(x->x.getId()==student.getUniversity().getApiId()).findFirst().get();
-
+        university.setCreatedAt(new Date());
        university.setApiId(university.getId());
        university.setId(0);
      }
-     else{
-
-     }
      student.setUniversity(university);
+     Student StudentResult=studentRepository.save(student);
+     PostStudentResponseDto studentDto=new PostStudentResponseDto();
+     studentDto.setId(StudentResult.getUniversity().getId());
+     studentDto.setStatus(Status.success);
+     studentDto.setMessage(StudentResult.getName()+" adlı öğrenci Karabük Üniversitesine başarıyla eklendi.");
 
-     return modelMapper.map(studentRepository.save(student),PostStudentResponseDto.class);
+     return studentDto;
 
     }
 

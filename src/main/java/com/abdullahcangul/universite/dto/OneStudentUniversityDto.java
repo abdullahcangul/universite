@@ -13,7 +13,7 @@ public class OneStudentUniversityDto {
     private int id;
     @ApiModelProperty(required = true)
     private String name;
-    @ApiModelProperty(required = true,value = "founded_at")
+    @ApiModelProperty(required = true,name = "founded_at",value ="founded_at" )
     private String founded_at;
     @ApiModelProperty(required = true)
     private String type;

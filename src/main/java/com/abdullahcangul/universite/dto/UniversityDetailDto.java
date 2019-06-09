@@ -25,14 +25,14 @@ public class UniversityDetailDto {
 
     @ApiModelProperty(required = true)
     private String city;
-    @ApiModelProperty(required = true,value = "web_page")
-    private String webPage;
+    @ApiModelProperty(required = true,name ="web_page",value = "web_page")
+    private String web_page;
 
     @ApiModelProperty(required = true)
     private String type;
 
-    @ApiModelProperty(required = true,value = "founded_at")
-    private Date foundedAt;
+    @ApiModelProperty(required = true,name = "founded_at",value = "founded_at")
+    private String founded_at;
 
 
     private List<UniversityDetailStudentDto> students;

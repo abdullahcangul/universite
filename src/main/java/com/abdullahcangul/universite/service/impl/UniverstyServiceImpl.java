@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,7 +46,7 @@ public class UniverstyServiceImpl implements UniversityService {
 
         ServiceResult<UniversityDetailDto> serviceResult=new ServiceResult<>();
         OneStudentDto oneStudentDto=new OneStudentDto();
-        University university= universityRepository.getByApiId(id);
+        University university= universityRepository.getById(id);
         if (university!=null){
             serviceResult.setResult(modelMapper.map(university,UniversityDetailDto.class));
             return serviceResult ;
@@ -59,6 +60,7 @@ public class UniverstyServiceImpl implements UniversityService {
 
     @Override
     public University save(University university) {
+        university.setCreatedAt(new Date());
         return universityRepository.save(university);
     }
 

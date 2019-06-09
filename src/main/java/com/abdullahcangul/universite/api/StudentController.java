@@ -23,7 +23,7 @@ public class StudentController  {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "")
     public ResponseEntity<List<StudentDto>> getAllStudents(){
 
         return  ResponseEntity.ok(studentService.findAll());
@@ -38,7 +38,7 @@ public class StudentController  {
 
     }
 
-    @PostMapping(value = "/")
+    @PostMapping(value = "")
     public ResponseEntity<PostStudentResponseDto> createStudent(@Valid @RequestBody PostStudentDto postStudentDto){
 
        return ResponseEntity.ok(studentService.save(postStudentDto));

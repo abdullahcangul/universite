@@ -19,6 +19,6 @@ public class UniversityDetailStudentDto {
 
     @ApiModelProperty(required = true)
     private String name;
-    @ApiModelProperty(required = true,value = "started_at")
-    private Date startedAt;
+    @ApiModelProperty(required = true,name = "started_at",value = "started_at")
+    private Date started_at;
 }

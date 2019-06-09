@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,24 +20,23 @@ public class University extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "api_id")
+    @Column(name = "api_id",unique = true)
     private int apiId;
 
-    @Column(name = "name",length = 50)
+    @Column(name = "name",length = 50,unique = true)
     private String name;
 
     @Column(name = "city",length = 50)
     private String city;
 
     @Column(name = "web_page",length = 50)
-    private String webPage;
+    private String web_page;
 
     @Column(name = "type",length = 50)
     private String type;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "founded_at")
-    private Date foundedAt;
+    @Column(name = "founded_at",length = 50)
+    private String founded_at;
 
     @OneToMany(mappedBy = "university",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Student> students;

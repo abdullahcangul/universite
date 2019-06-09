@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "students")
@@ -18,16 +18,16 @@ public class Student extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private int id;
 
-    @Column(name = "name",length = 100)
+
+    @Column(nullable = false,length = 100)
     private String name;
 
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "started_at")
-    private Date startedAt;
+    private LocalDate startedAt;
+
 
     @ManyToOne(optional=true,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "university_id")
